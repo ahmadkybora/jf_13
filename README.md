@@ -17,7 +17,7 @@ npm install webpack-dev-server --save-dev
 * npm i html-loader --save
 * npm i css-loader style-loader --save
 * npm i file-loader --save
-* npm i ts-loader --save
+* npm i file-loader --save
 ////////////////////////////////////////////////////////////////////
 اگر از
 sass
@@ -66,3 +66,15 @@ yarn build
 ```
 
 to bundle your application
+
+refrences
+
+https://w3c.github.io/webcomponents-cg/
+webcomponents
+google
+angular
+react
+vue
+nuxt
+next
+node

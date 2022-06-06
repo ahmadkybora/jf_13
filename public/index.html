@@ -7,17 +7,243 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JF</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="index.css" />
 </head>
 
 <body>
-    <a href="/" class="nav--link" data-link>Dashboard</a>
+    <!-- <a href="/" class="nav--link" data-link>Dashboard</a>
     <a href="/posts" class="nav--link" data-link>Posts</a>
     <a href="/users" class="nav--link" data-link>Users</a>
+    <a href="/cat" class="nav--link" data-link>Cat</a>
+    <a href="/example" class="nav--link" data-link>Example</a>
+    <a href="/counter" class="nav--link" data-link>Counter</a>
+    <a href="/articles" class="nav--link" data-link>Articles</a> -->
+    <!-- <a href="/users" class="nav--link" data-link>Users</a> -->
 
     <div id="app">
+        <!-- <my-counter></my-counter> -->
+        <!-- <c-counter value="100" step="2"></c-counter> -->
         <page-router></page-router>
+        <my-element></my-element>
+        <c-users></c-users>
     </div>
+    <!-- <h1 x-data="{ message: 'I ❤️ Alpine' }" x-text="message"></h1> -->
+    <!-- <h1 x-text="{ 1 + 2 }"></h1> -->
+    <!-- <div x-data="{open: 'true'}">
+        <span x-text="open"></span>
+    </div> -->
+
+    <!-- <h1>Outside</h1> -->
+    <!-- <my-element></my-element> -->
+    <!-- <my-element x-data="{ foo: 'This is really cool!!!' }"></my-element> -->
+    <template id="my-element-template">
+        <!-- <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script> -->
+        <!-- <style>
+            * {
+            background: red;
+            }
+        </style> -->
+        <!-- <template f-if="n"></template> -->
+        <!-- <template x-for="">
+            <span x-data=""></span>
+            <p></p>
+        </template> -->
+        <!-- <h1 x-data="{ message: 'I ❤️ Alpine' }" x-text="message"></h1>
+        <div x-data="{ open: false }">
+            <div x-data="{ label: 'Content:' }">
+                <span x-text="label"></span>
+                <span x-show="open"></span>
+            </div>
+        </div> -->
+
+        <!-- <div x-data="dropdown">
+            <button @click="toggle">Expand</button>
+         
+            <span x-show="open">Content...</span>
+        </div>
+         
+        <div x-data="dropdown">
+            <button @click="toggle">Expand</button>
+         
+            <span x-show="open">Some Other Content...</span>
+        </div> -->
+
+        <!-- <span x-text="1 + 2"></span> -->
+        <!-- <h1 x-data="{ message: 'I ❤️ Alpine' }" x-text="message"></h1>
+        <div x-data="{ title: 'Start Here' }">
+            <h1 x-text="title"></h1>
+        </div> -->
+
+
+        <ul x-data="{ colors: ['Red', 'Orange', 'Yellow'] }">
+            <template x-for="color in colors">
+                <li x-text="color"></li>
+            </template>
+        </ul>
+
+        <!-- <div x-data="dropdown">
+            <button @click="toggle">Toggle Content</button>
+         
+            <div x-show="open">
+                Content...
+            </div>
+        </div>
+         
+        <script>
+            // import Alpine from './node_modules/alpinejs/builds/module.js'
+            document.addEventListener('alpine:init', () => {
+                Alpine.data('dropdown', () => ({
+                    open: false,
+         
+                    toggle() {
+                        this.open = ! this.open
+                    },
+                }))
+            })
+        </script> -->
+
+        <!-- <div x-data="{ count: 0 }">
+            <button x-on:click="count++">Increment</button>
+         
+            <span x-text="count"></span>
+        </div> -->
+
+
+        <!-- <div x-data>
+            <button @click="$store.tabs.current = 'first'">First Tab</button>
+            <button @click="$store.tabs.current = 'second'">Second Tab</button>
+            <button @click="$store.tabs.current = 'third'">Third Tab</button>
+        </div> -->
+
+        <!-- <script type="module">
+            import Alpine from './alpinejs'
+ 
+            window.Alpine = Alpine
+            
+            Alpine.start()
+            Alpine.data('dropdown', () => ({
+                open: false,
+            
+                toggle() {
+                    this.open = ! this.open
+                }
+            }))
+        </script> -->
+        <!-- <template x-show="">
+            <div x-data="{open: 'true'}">
+                <span x-text="open"></span>
+            </div>
+        </template> -->
+        <!-- <h1>Inside</h1> -->
+    </template>
+
+    <script>
+        const template = document.createElement("template");
+        template.innerHTML = `
+        <style>
+            span, button {
+            font-size: 200%;
+            }
+
+            span {
+            width: 4rem;
+            display: inline-block;
+            text-align: center;
+            }
+
+            button {
+            width: 4rem;
+            height: 4rem;
+            border: none;
+            border-radius: 10px;
+            background-color: seagreen;
+            color: white;
+            }
+        </style>
+        <div x-data="$el.parentElement.data()">
+            <button @click="dec()">-</button>
+            <span x-text="count"></span>
+            <button @click="inc()">+</button>
+        </div>
+        `;
+
+        class MyCounter extends HTMLElement {
+        connectedCallback() {
+            this.append(template.content.cloneNode(true));
+        }
+
+        data() {
+            return {
+            count: 0,
+            inc() {
+                this.count++;
+            },
+            dec() {
+                this.count--;
+            },
+            };
+        }
+        }
+
+        customElements.define("my-counter", MyCounter);
+
+        class MyElement extends HTMLElement {
+            // static get observedAttributes() {
+            //     return ['', ''];
+            // }
+
+            constructor() {
+            super();
+            
+             //بدون کد زیر کار کرد
+            // const shadow = this.attachShadow({ mode: "open" });
+
+            // shadow.innerHTML = `
+            //     <div>
+            //         <div x-data="{ foo: 'bar' }">
+            //             <input x-model="foo" />
+            //             <slot name="content"></slot>
+            //         </div>
+            //     </div>
+            // `;
+            const template = document.getElementById("my-element-template").content;
+            this.appendChild(template.cloneNode(true));
+
+            // console.log(template);
+            // const templates = template.querySelector("template");
+            // const span = template.querySelector("span").getAttribute('f-text');
+            // span.setAttribute('f-text','JavaScript DOM setAttribute');
+            // console.log(span);
+            // console.log(templates.children);
+            // // const myElement = document.getElementById('foo');
+            // for (let i = 0; i < templates.children.length; i++) {
+            //     console.log(templates.children[i].tagName);
+            // }
+
+            // console.log(templates);
+            // const condition = templates.children[0];
+
+            // condition.innerHtml = 'b';
+            // console.log(condition);
+
+
+
+            // s.innerHTML = 'bb';
+            // console.log(template.querySelectorAll("span"));
+            }
+
+            // connectedCallback() {
+            //     // this.shadowRoot.append(template.content.cloneNode(true));
+            //     // this.shadowRoot.innerHTML = '<p x-text="foo"></p><input x-model="foo" />';
+            //     // this.shadowRoot.querySelector("span").innerHTML = "b";
+            // }
+            // disconnectedCallback() {}
+            // attributeChangedCallback(name, oldValue, newValue) {}
+            // adoptedCallback() {}
+        }
+        customElements.define("my-element", MyElement);
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>

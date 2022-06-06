@@ -5,5 +5,9 @@
 export const routes = [
     { path: "/", name: "dashboard" },
     { path: "/users", name: "users", component: "<c-users />" },
-    { path: "/posts", name: "posts" },
+    { path: "/posts", name: "posts", component: "<c-posts />" },
+    { path: "/cat", name: "cat", component: "<c-cat />" },
+    { path: "/example", name: "example", component: "<c-example />" },
+    { path: "/counter", name:"counter", component: "<c-counter />"}, 
+    { path: "/articles", name:"articles", component: "<c-articles />"}, 
 ]

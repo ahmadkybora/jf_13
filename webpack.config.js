@@ -16,9 +16,10 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./public/index.html",
+            template: "./public/index.html", // template file
+            filename: "index.html", // output file
         }),
-
+        // htmlGenerators,
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
     ],
@@ -35,6 +36,10 @@ const config = {
                 }
             },
             {
+                test: /\.ts$/i,
+                use: ["ts-loader"],
+            },
+            {
                 test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
                 type: "asset",
                 loader: 'file-loader',
@@ -44,7 +49,7 @@ const config = {
             },
             {
                 test: /\.html$/i,
-                use: ["html-loader"],
+                loader: "html-loader",
             },
             {
                 test: /\.css$/i,
@@ -64,6 +69,15 @@ const config = {
         ],
     },
 };
+
+// const htmlGenerators = listOfComponents.reduce((entries, componentName) => {
+// 	entries.push(new HtmlWebpackPlugin({
+// 		inject: true,
+// 		chunks: [componentName],
+// 		filename: `${componentName}.html`
+// 	}));
+// 	return entries;
+// }, []);
 
 module.exports = () => {
     if (isProduction) {

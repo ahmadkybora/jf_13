@@ -1,0 +1,15 @@
+<template>
+    <h1 x-data="{ message: 'I ❤️ Alpine' }" x-text="message"></h1>
+</template>
+<script>
+    export default class User extends HTMLElement{
+        constructor(){
+            super();
+            const template = document.querySelector('template')[0].content;
+            console.log(template);
+            this.appendChild(template.cloneNode(true));
+        }
+
+    }
+    // customElements.define("my-users", User);
+</script>

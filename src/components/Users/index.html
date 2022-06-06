@@ -1,0 +1,37 @@
+<!-- <div id="html" class="container">
+    <h1>Login Form</h1>
+    <form>
+        <div class="row">
+            <div class="offset-md-4 col-md-4">
+                <div class="form-group">
+                    <input name="first_name" class="form-control" id="first-name" onchange="this.handleChange()" />
+                    <input name="last_name" class="form-control" id="last-name" onchange="this.handleChange()" />
+                    <input name="username" class="form-control" id="username" onchange="this.handleChange()" />
+                </div>
+                <button id="login" type="submit" class="btn btn-success">Click</button>
+            </div>
+        </div>
+    </form>
+</div> -->
+
+
+
+
+<!-- <div x-data="dropdown">
+    <button @click="toggle">...</button>
+ 
+    <div x-show="open">...</div>
+</div>
+ 
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('dropdown', () => ({
+            open: false,
+ 
+            toggle() {
+                this.open = ! this.open
+            }
+        }))
+    })
+</script> -->
+<h1 x-data="{ message: 'I ❤️ Alpine' }" x-text="message"></h1>
