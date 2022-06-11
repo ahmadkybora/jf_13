@@ -1,0 +1,20 @@
+<script defer="defer" src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
+
+<p>sa</p>
+<template id="my-element">
+    <p>ss</p>
+    <h1 x-data="{ message: 'I ❤️ Alpine' }" x-text="message"></h1>
+</template>
+
+<script>
+    console.log(document.querySelector("template").content)
+    class User extends HTMLElement{
+        constructor(){
+            super();
+            const e=document.querySelector("template").content;
+            console.log("e"),
+            this.appendChild(e.cloneNode(!0))
+        }
+    }
+    customElements.define("my-users", User)
+</script>

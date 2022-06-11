@@ -1,9 +1,20 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HTMLWebpackPLugin = require("html-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV == "production";
+
+// متغییر زیر در اصل آرای های از نام کامپوننت ها است
+let htmlPageNames = ['users'];
+// اینجا همه کامپوننت ها در یک قسمت در حال لود شدن هستند
+let multipleHtmlPlugins = htmlPageNames.map(name => {
+  return new HTMLWebpackPLugin({
+    template: `./src/components/${name}.html`, // relative path to the HTML files
+    filename: `${name}.html`, // output HTML files
+    chunks: [`${name}`] // respective JS files
+  })
+});
 
 const config = {
     entry: "./src/main.js",
@@ -15,14 +26,18 @@ const config = {
         host: "localhost",
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: "./public/index.html", // template file
+        new HTMLWebpackPLugin({
+            template: "public/index.html", // template file
             filename: "index.html", // output file
         }),
+        // new HTMLWebpackPLugin({  // Also generate a test.html
+        //     template: 'public/users.html',
+        //     filename: 'users.html',
+        //   })
         // htmlGenerators,
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
-    ],
+    ].concat(multipleHtmlPlugins),
     module: {
         rules: [{
                 test: /\.js$/,
@@ -49,7 +64,7 @@ const config = {
             },
             {
                 test: /\.html$/i,
-                loader: "html-loader",
+                use: ["html-loader"],
             },
             {
                 test: /\.css$/i,
