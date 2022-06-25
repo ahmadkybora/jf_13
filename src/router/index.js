@@ -4,8 +4,8 @@
 
 export const routes = [
     { path: "/", name: "dashboard" },
-    // { path: "/users", name: "users", component: "<c-users />" },
-    { path: "/users", name: "users", component: "<my-users />" },
+    { path: "/users", name: "users", component: "<c-users />" },
+    // { path: "/users", name: "users", component: "<my-users />" },
     { path: "/posts", name: "posts", component: "<c-posts />" },
     { path: "/cat", name: "cat", component: "<c-cat />" },
     { path: "/example", name: "example", component: "<c-example />" },

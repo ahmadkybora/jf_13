@@ -9,6 +9,7 @@ class Posts extends Component {
     }
 
     constructor() {
+        console.log("posts")
         super();
         this.render();
     }
@@ -21,9 +22,13 @@ class Posts extends Component {
     }
 
     render() {
-        this.shadowRoot.innerHTML = this.bootsrap + `
+        this.shadowRoot.innerHTML = this.bootsrap + this.alpine + `
         <div class="container">
-        <c-users></c-users>
+            <ul x-data="{ colors: ['Red', 'Orange', 'Yellow'] }">
+                <template x-for="color in colors">
+                    <li x-text="color"></li>
+                </template>
+            </ul>
             <h1>Login Form</h1>
             <form>
                 <div class="row">
