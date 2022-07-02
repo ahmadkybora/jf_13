@@ -10,7 +10,6 @@ class Users extends Component {
 
     // state = true;
     constructor() {
-        console.log("users")
         super();
         this.render();
     }
@@ -32,15 +31,57 @@ class Users extends Component {
         // `;
         // this.shadowRoot.innerHTML = this.bootstrap + html;
         this.shadowRoot.innerHTML = this.bootsrap + `
+            <ul f-data="message" f-for="messages in message">
+                <li f-data="message.id"></li>
+                <li f-data="message.name"></li>
+                <li f-data="message.number"></li>
+            </ul>
             <div>
-                <h1 f-data="message" f-text="message"></h1>
+                <h1 f-data="message" f-text="message" data-id="is"></h1>
                 <h2 f-show="message" f-wow="message"></h1>
             <div>
         `;
     }
+    messages = [
+        {id: 1, name: 'ali', number: 12}, 
+        {id: 2, name: 'reza', number: 13}, 
+        {id: 3, name: 'ghader', number: 14}
+    ];
    //  
     // این متد برای رویداد در وب کامپوننت استفاده میشود
     connectedCallback() {
+        const ele = this.shadowRoot.querySelector('ul');
+        const li = this.shadowRoot.querySelectorAll('li');
+
+        // ✅ Get object of all {name: value}
+        const attrs = ele.getAttributeNames().reduce((acc, name) => {
+          return {...acc, [name]: ele.getAttribute(name)};
+        }, {});
+        
+        // 👇️ {id: 'blue', 'data-id': 'example', class: 'box'}
+        Object.entries(attrs).map(m => {
+            switch(m[0]) {
+                case 'f-data':
+                    ele.innerHTML = "salam"
+                break;
+
+                case 'f-for':
+                    var mm = m[1].split(" ");
+                    if(mm[0] === "messages") {
+                        this.messages.map(m => {
+                            for(let i = 0; i < li.length; i++) {
+                                console.log(li[i]);
+                                (li[i].getAttribute("f-data") === "message.id") ? (li[i].innerHTML = m.id) : "";
+                                (li[i].getAttribute("f-data") === "message.name") ? (li[i].innerHTML = m.name) : "";
+                                (li[i].getAttribute("f-data") === "message.number") ? (li[i].innerHTML = m.number) : "";
+                            }
+                            // console.log(li[i])
+                        })
+                    }
+                break;
+            }
+            // console.log(m);
+        });
 
         // این قسمت در اصل بر روی المنت ها میچرخد و به دنبال اتریبیوت خاص میگردد
         const element = this.shadowRoot.querySelector('div');
@@ -48,7 +89,7 @@ class Users extends Component {
             const attrs = element.children[i].getAttributeNames().reduce((acc, name) => {
             return {...acc, [name]: element.getAttribute(name)};
             }, {});
-            console.log(attrs);
+            // console.log(typeof(attrs))
             // if(attrs === "f-data") {
             //     console.log(attrs)
             // }
@@ -63,6 +104,7 @@ class Users extends Component {
             // console.log(attrs);
         }
 
+        
         // this.shadowRoot.querySelectorAll
         // console.log(element.children.length);
         // console.log(element.children[i].getAttributeNames());
