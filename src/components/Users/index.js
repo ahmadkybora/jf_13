@@ -31,10 +31,10 @@ class Users extends Component {
         // `;
         // this.shadowRoot.innerHTML = this.bootstrap + html;
         this.shadowRoot.innerHTML = this.bootsrap + `
-            <ul f-data="message" f-for="messages in message">
-                <li f-data="message.id"></li>
-                <li f-data="message.name"></li>
-                <li f-data="message.number"></li>
+            <ul id="b" f-data="message" f-for="messages in message">
+                <li id="a1" f-data="message.id"></li>
+                <li id="a2" f-data="message.name"></li>
+                <li id="a3" f-data="message.number"></li>
             </ul>
             <div>
                 <h1 f-data="message" f-text="message" data-id="is"></h1>
@@ -51,7 +51,14 @@ class Users extends Component {
     // این متد برای رویداد در وب کامپوننت استفاده میشود
     connectedCallback() {
         const ele = this.shadowRoot.querySelector('ul');
-        const li = this.shadowRoot.querySelectorAll('li');
+        const a1 = this.shadowRoot.getElementById('a1');
+        const a2 = this.shadowRoot.getElementById('a2');
+        const a3 = this.shadowRoot.getElementById('a3');
+
+        // const ele = this.shadowRoot.getElementById('b');
+        // console.log(ele.children[0].getAttribute("f-data"))
+
+        const li = ele.querySelectorAll('li');
 
         // ✅ Get object of all {name: value}
         const attrs = ele.getAttributeNames().reduce((acc, name) => {
@@ -59,36 +66,69 @@ class Users extends Component {
         }, {});
         
         // 👇️ {id: 'blue', 'data-id': 'example', class: 'box'}
-        Object.entries(attrs).map(m => {
+
+        // console.log(ele.querySelectorAll('li').length)
+
+        const fData = () => {
+            ele.innerHTML = "salam"
+        }
+        const fFor = () => {
+            var mm = m[1].split(" ");
+            if(mm[0] === "messages") {
+                this.messages.map(m => {
+                    // console.log(ele.children[1])
+                    for(let i = 0; i < ele.querySelectorAll('li').length; i++) {
+
+                        (ele.children[i].getAttribute("f-data") === "message.id") ? (ele.children[i].innerHTML = m.id) : "";
+                        (ele.children[i].getAttribute("f-data") === "message.name") ? (ele.children[i].innerHTML = m.name) : "";
+                        (ele.children[i].getAttribute("f-data") === "message.number") ? (ele.children[i].innerHTML = m.number) : "";
+                    }
+                    // console.log(li[i])
+                })
+            }
+        }
+        
+        Object.entries(attrs).forEach(m => {
+
             switch(m[0]) {
                 case 'f-data':
-                    ele.innerHTML = "salam"
+                    fData();
                 break;
 
                 case 'f-for':
                     var mm = m[1].split(" ");
                     if(mm[0] === "messages") {
                         this.messages.map(m => {
-                            for(let i = 0; i < li.length; i++) {
-                                console.log(li[i]);
-                                (li[i].getAttribute("f-data") === "message.id") ? (li[i].innerHTML = m.id) : "";
-                                (li[i].getAttribute("f-data") === "message.name") ? (li[i].innerHTML = m.name) : "";
-                                (li[i].getAttribute("f-data") === "message.number") ? (li[i].innerHTML = m.number) : "";
-                            }
-                            // console.log(li[i])
-                        })
+                            console.log(a1);
+                            a1.innerHTML += `${m.id}`;
+                            a2.innerHTML += `${m.name}`;
+                            a3.innerHTML += `${m.number}`;
+                            // console.log(ele.children[1])
+                            // for(let i = 0; i < li.length; i++) {
+                            //     // if(li[i].getAttribute("f-data") === "message.id") {
+
+                            //     // }
+                            //     li[i].innerHTML = `${m.name}`;
+                            //     li[i].innerHTML = `${m.number}`;
+                            //     // (li[i].getAttribute("f-data") === "message.id") ? (li[i].innerHTML = m.id) : "";
+                            //     // (li[i].getAttribute("f-data") === "message.name") ? (li[i].innerHTML = m.name) : "";
+                            //     // (li[i].getAttribute("f-data") === "message.number") ? (li[i].innerHTML = m.number) : "";
+                            // }
+                            
+                        })  
                     }
+                    // fFor();
                 break;
             }
             // console.log(m);
         });
 
         // این قسمت در اصل بر روی المنت ها میچرخد و به دنبال اتریبیوت خاص میگردد
-        const element = this.shadowRoot.querySelector('div');
-        for(let i=0; i<element.children.length; i++) {
-            const attrs = element.children[i].getAttributeNames().reduce((acc, name) => {
-            return {...acc, [name]: element.getAttribute(name)};
-            }, {});
+        // const element = this.shadowRoot.querySelector('div');
+        // for(let i=0; i<element.children.length; i++) {
+        //     const attrs = element.children[i].getAttributeNames().reduce((acc, name) => {
+        //     return {...acc, [name]: element.getAttribute(name)};
+        //     }, {});
             // console.log(typeof(attrs))
             // if(attrs === "f-data") {
             //     console.log(attrs)
@@ -102,7 +142,7 @@ class Users extends Component {
             //         break;
             // }
             // console.log(attrs);
-        }
+        // }
 
         
         // this.shadowRoot.querySelectorAll
