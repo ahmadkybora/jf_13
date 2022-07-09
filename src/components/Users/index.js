@@ -30,17 +30,18 @@ class Users extends Component {
         // <h1 x-data="{ message: 'I ❤️ Alpine' }" x-text="message"></h1>
         // `;
         // this.shadowRoot.innerHTML = this.bootstrap + html;
-        this.shadowRoot.innerHTML = this.bootsrap + `
-            <ul id="b" f-data="message" f-for="messages in message">
-                <li id="a1" f-data="message.id"></li>
-                <li id="a2" f-data="message.name"></li>
-                <li id="a3" f-data="message.number"></li>
-            </ul>
-            <div>
-                <h1 f-data="message" f-text="message" data-id="is"></h1>
-                <h2 f-show="message" f-wow="message"></h1>
-            <div>
-        `;
+        this.shadowRoot.innerHTML = this.bootsrap + html;
+        // `
+        //     <ul id="b" f-data="message" f-for="messages in message">
+        //         <li id="a1" f-data="message.id"></li>
+        //         <li id="a2" f-data="message.name"></li>
+        //         <li id="a3" f-data="message.number"></li>
+        //     </ul>
+        //     <div>
+        //         <h1 f-data="message" f-text="message" data-id="is"></h1>
+        //         <h2 f-show="message" f-wow="message"></h1>
+        //     <div>
+        // `;
     }
     messages = [
         {id: 1, name: 'ali', number: 12}, 
@@ -87,41 +88,100 @@ class Users extends Component {
                 })
             }
         }
+        // console.log(ele.children.length);
+        // console.log(ele.children[1].getAttribute('f-data'));
+        // console.log(ele.children[1].getAttribute('f-data') === 'message.name' ? ele.children[1].innerHTML = 1 : '');
         
-        Object.entries(attrs).forEach(m => {
+        // ele.children[0].getAttribute('f-data') === 'message.id' ? ele.children[0].innerHTML = 1 : '';
+        // ele.children[1].getAttribute('f-data') === 'message.name' ? ele.children[1].innerHTML = 'ali' : '';
+        // ele.children[2].getAttribute('f-data') === 'message.number' ? ele.children[2].innerHTML = 12 : '';
+        
+        // console.log(ele.children[0])
 
-            switch(m[0]) {
-                case 'f-data':
-                    fData();
-                break;
+        // ele.children[0].innerHTML = 1;
+        // ele.children[1].innerHTML = 'ali';
+        // ele.children[2].innerHTML = 12;
+        
+        let data = [];
+        for(let i=0; i < ele.children.length; i++) {
+            // console.log(ele.children[i].getAttribute('f-data'));
+            data[i] = ele.children[i].getAttribute('f-data');
+        }
+        // console.log(data);
+        // console.log(attrs.hasOwnProperty('f-data'));
+        // let attr;
+        // switch(attrs.hasOwnProperty(attr)) {
+        //     case (attr === 'f-data'):
+        //         fData();
+        // }
 
-                case 'f-for':
-                    var mm = m[1].split(" ");
-                    if(mm[0] === "messages") {
-                        this.messages.map(m => {
-                            console.log(a1);
-                            a1.innerHTML += `${m.id}`;
-                            a2.innerHTML += `${m.name}`;
-                            a3.innerHTML += `${m.number}`;
-                            // console.log(ele.children[1])
-                            // for(let i = 0; i < li.length; i++) {
-                            //     // if(li[i].getAttribute("f-data") === "message.id") {
+        // if(attrs.hasOwnProperty('f-data')) {
+        //     fData();
+        // } 
+        if(attrs.hasOwnProperty('f-for')) {
+            var mm = attrs['f-for'].split(" ");
+            if(mm[0] === "messages") {
+                // this.messages.forEach(m => {
+                //     console.log(m.id)
+                // })
+                // console.log(this.messages);
+                for(let i = 0; i < ele.children.length; i++) {
+                    // console.log(mm[2]);
+                    // console.log(this.messages);
+                    // for(let j = 0; j < this.messages.length; j++) {
+                    this.messages.forEach(m => {
+                        (data[i] === `${mm[2]}.id`) ? ele.children[i].innerHTML += m.id + '<br />' : '';
+                        (data[i] === `${mm[2]}.name`) ? ele.children[i].innerHTML += m.name + '<br />' : '';
+                        (data[i] === `${mm[2]}.number`) ? ele.children[i].innerHTML += m.number + '<br />' : '';
+                    // }
+                    });
+                }
+                // console.log(ele.children[1]);
+                // this.messages.map(m => {
 
-                            //     // }
-                            //     li[i].innerHTML = `${m.name}`;
-                            //     li[i].innerHTML = `${m.number}`;
-                            //     // (li[i].getAttribute("f-data") === "message.id") ? (li[i].innerHTML = m.id) : "";
-                            //     // (li[i].getAttribute("f-data") === "message.name") ? (li[i].innerHTML = m.name) : "";
-                            //     // (li[i].getAttribute("f-data") === "message.number") ? (li[i].innerHTML = m.number) : "";
-                            // }
-                            
-                        })  
-                    }
-                    // fFor();
-                break;
+                //     ele.innerHTML = m.id;
+                //     // data[1].innerHTML = m.name;
+                //     // data[2].innerHTML = m.number;
+                // });
             }
-            // console.log(m);
-        });
+        }
+
+        // Object.entries(attrs).forEach(m => {
+        //     // console.log(m);
+        //     switch(m[0]) {
+        //         case 'f-data':
+        //             fData();
+        //         break;
+
+        //         case 'f-for':
+        //             var mm = m[1].split(" ");
+        //             if(mm[0] === "messages") {
+        //                 // console.log(ele.children[1].getAttribute('f-data'));
+        //                 // console.log(this.messages);
+        //                 this.messages.map(m => {
+
+        //                     a1.innerHTML += `${m.id}`;
+        //                     a2.innerHTML += `${m.name}`;
+        //                     a3.innerHTML += `${m.number}`;
+        //                     // console.log(ele.children[1])
+        //                     // for(let i = 0; i < li.length; i++) {
+        //                     //     // if(li[i].getAttribute("f-data") === "message.id") {
+
+        //                     //     // }
+        //                     //     li[i].innerHTML = `${m.name}`;
+        //                     //     li[i].innerHTML = `${m.number}`;
+        //                     //     // (li[i].getAttribute("f-data") === "message.id") ? (li[i].innerHTML = m.id) : "";
+        //                     //     // (li[i].getAttribute("f-data") === "message.name") ? (li[i].innerHTML = m.name) : "";
+        //                     //     // (li[i].getAttribute("f-data") === "message.number") ? (li[i].innerHTML = m.number) : "";
+        //                     // }
+                            
+        //                 })  
+        //             }
+        //             // fFor();
+        //         break;
+        //     }
+        //     // console.log(m);
+        // });
 
         // این قسمت در اصل بر روی المنت ها میچرخد و به دنبال اتریبیوت خاص میگردد
         // const element = this.shadowRoot.querySelector('div');

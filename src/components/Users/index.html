@@ -1,14 +1,14 @@
-<!doctype html>
+<!-- <!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>JF</title>
+        <title>JF</title> -->
         <!-- <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script> -->
         <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
 
-    </head>
+    <!-- </head>
     <body>
 
         <form>
@@ -32,4 +32,15 @@
         </ul>
 
     </body>
-</html>
+</html> -->
+
+
+<ul id="b" f-data="message" f-for="messages in message">
+    <li id="a1" f-data="message.id"></li>
+    <li id="a2" f-data="message.name"></li>
+    <li id="a3" f-data="message.number"></li>
+</ul>
+<div>
+    <h1 f-data="message" f-text="message" data-id="is"></h1>
+    <h2 f-show="message" f-wow="message"></h1>
+<div>
