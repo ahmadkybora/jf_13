@@ -105,8 +105,10 @@ class Users extends Component {
         let data = [];
         for(let i=0; i < ele.children.length; i++) {
             // console.log(ele.children[i].getAttribute('f-data'));
-            data[i] = ele.children[i].getAttribute('f-data');
+            data[i] = ele.children[i].getAttribute('f-data').split(".")[1];
         }
+        // var mess = data[0].split(".");
+        // console.log(data[0]);
         // console.log(data);
         // console.log(attrs.hasOwnProperty('f-data'));
         // let attr;
@@ -125,16 +127,38 @@ class Users extends Component {
                 //     console.log(m.id)
                 // })
                 // console.log(this.messages);
+                // console.log(`${mm[2]}.id`)
+
                 for(let i = 0; i < ele.children.length; i++) {
                     // console.log(mm[2]);
                     // console.log(this.messages);
                     // for(let j = 0; j < this.messages.length; j++) {
-                    this.messages.forEach(m => {
-                        (data[i] === `${mm[2]}.id`) ? ele.children[i].innerHTML += m.id + '<br />' : '';
-                        (data[i] === `${mm[2]}.name`) ? ele.children[i].innerHTML += m.name + '<br />' : '';
-                        (data[i] === `${mm[2]}.number`) ? ele.children[i].innerHTML += m.number + '<br />' : '';
+                        // console.log(`${mm[2]}.id`)
+                        // console.log(data[1])
+
+                        // console.log(data[0]);
+                        // console.log(`${mm[2]}.id`);
+                        // console.log(this.messages[1].id);
+
+                        // let message;
+                        // for(this.messages in message) {
+                        //     console.log(message)
+                        // }
+                        // console.log(this.messages[1]);
+                        // console.log(data[i]);
+                        // console.log(Object.keys(this.messages[i])[0]);
+                    // this.messages.forEach(m => {
+                        // console.log(m);
+                        // console.log(Object.keys(this.messages[i])[0]);
+                        (data[i] === (Object.keys(this.messages[i])[i])) ? ele.children[i].innerHTML = (Object.values(this.messages[i])[i]) : '';
+                        (data[i] === (Object.keys(this.messages[i])[i])) ? ele.children[i].innerHTML = (Object.values(this.messages[i])[i]) : '';
+                        (data[i] === (Object.keys(this.messages[i])[i])) ? ele.children[i].innerHTML = (Object.values(this.messages[i])[i]) : '';
+                        // (data[i] === `${mm[2]}.id`) ? ele.children[i].innerHTML += m.id : '';
+                        // (data[i] === `${mm[2]}.name`) ? ele.children[i].innerHTML += m.name : '';
+                        // (data[i] === `${mm[2]}.number`) ? ele.children[i].innerHTML += m.number : '';
+                        ele.children[i].innerHTML += '<br />';
                     // }
-                    });
+                    // });
                 }
                 // console.log(ele.children[1]);
                 // this.messages.map(m => {
