@@ -34,12 +34,25 @@
     </body>
 </html> -->
 
+<!-- <tr id="b" f-data="message" f-for="messages in message">
+    <td f-data="message.id"></td>
+    <td f-data="message.name"></td>
+    <td f-data="message.number"></td>
+</tr> -->
+
+<div id="a">
+    <p f-data="m"></p>
+    <span f-data="s"></span>
+    <div f-data="n"></div>
+</div>
+
 
 <ul id="b" f-data="message" f-for="messages in message">
     <li id="a1" f-data="message.id"></li>
     <li id="a2" f-data="message.name"></li>
     <li id="a3" f-data="message.number"></li>
 </ul>
+
 <div>
     <h1 f-data="message" f-text="message" data-id="is"></h1>
     <h2 f-show="message" f-wow="message"></h1>

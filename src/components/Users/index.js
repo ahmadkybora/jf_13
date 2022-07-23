@@ -51,6 +51,11 @@ class Users extends Component {
    //  
     // این متد برای رویداد در وب کامپوننت استفاده میشود
     connectedCallback() {
+        const div = this.shadowRoot.querySelector('div');
+        console.log(div.children.length);
+        for(let i = 0; i < div.children.length; i++) {
+            console.log(Object.entries(div.children[i].getAttributeNames()));
+        }
         const ele = this.shadowRoot.querySelector('ul');
         const a1 = this.shadowRoot.getElementById('a1');
         const a2 = this.shadowRoot.getElementById('a2');
@@ -102,11 +107,11 @@ class Users extends Component {
         // ele.children[1].innerHTML = 'ali';
         // ele.children[2].innerHTML = 12;
         
-        let data = [];
-        for(let i=0; i < ele.children.length; i++) {
-            // console.log(ele.children[i].getAttribute('f-data'));
-            data[i] = ele.children[i].getAttribute('f-data').split(".")[1];
-        }
+        // let data = [];
+        // for(let i=0; i < ele.children.length; i++) {
+        //     // console.log(ele.children[i].getAttribute('f-data'));
+        //     data[i] = ele.children[i].getAttribute('f-data').split(".")[1];
+        // }
         // var mess = data[0].split(".");
         // console.log(data[0]);
         // console.log(data);
@@ -129,7 +134,31 @@ class Users extends Component {
                 // console.log(this.messages);
                 // console.log(`${mm[2]}.id`)
 
-                for(let i = 0; i < ele.children.length; i++) {
+                // console.log(this.messages)
+                // this.messages.forEach(message => {
+                    // console.log(ele.children[i])
+                    // console.log(ele.children);
+                    for(let i = 0; i < ele.children.length; i++) {
+                        for( let j = 0; j < ele.children.length; j++) {
+                            // console.log(ele.children[i])
+                            ele.children[i].innerHTML += `<li>${(Object.values(this.messages[i])[j])}</li>`;
+                            // ele.children[i].innerHTML += `<li></li>`
+                            // console.log((Object.values(this.messages[i])[j]));
+                            // console.log((Object.keys(this.messages[i])[j]));
+                            // console.log('<br />');
+                            // console.log(data[i]);
+                            // (data[i] === (Object.keys(this.messages[i])[j])) ? ele.children[i].innerHTML += (Object.values(this.messages[i])[j]) : '';
+                        }
+                        // console.log(Object.keys(this.messages[0])[2]);
+                        // console.log((Object.values(this.messages[0])[2]));
+                        // console.log(data[0]);
+                        // (data[i] === (Object.keys(this.messages[i])[i])) ? ele.children[i].innerHTML = (Object.values(this.messages[i])[i]) : '';
+                        // (data[i] === (Object.keys(this.messages[i])[i])) ? ele.children[i].innerHTML = (Object.values(this.messages[i])[i]) : '';
+                        // (data[i] === (Object.keys(this.messages[i])[i])) ? ele.children[i].innerHTML = (Object.values(this.messages[i])[i]) : '';
+                    }
+                // });
+
+                // for(let i = 0; i < ele.children.length; i++) {
                     // console.log(mm[2]);
                     // console.log(this.messages);
                     // for(let j = 0; j < this.messages.length; j++) {
@@ -150,16 +179,16 @@ class Users extends Component {
                     // this.messages.forEach(m => {
                         // console.log(m);
                         // console.log(Object.keys(this.messages[i])[0]);
-                        (data[i] === (Object.keys(this.messages[i])[i])) ? ele.children[i].innerHTML = (Object.values(this.messages[i])[i]) : '';
-                        (data[i] === (Object.keys(this.messages[i])[i])) ? ele.children[i].innerHTML = (Object.values(this.messages[i])[i]) : '';
-                        (data[i] === (Object.keys(this.messages[i])[i])) ? ele.children[i].innerHTML = (Object.values(this.messages[i])[i]) : '';
+                        // (data[i] === (Object.keys(this.messages[i])[i])) ? ele.children[i].innerHTML = (Object.values(this.messages[i])[i]) : '';
+                        // (data[i] === (Object.keys(this.messages[i])[i])) ? ele.children[i].innerHTML = (Object.values(this.messages[i])[i]) : '';
+                        // (data[i] === (Object.keys(this.messages[i])[i])) ? ele.children[i].innerHTML = (Object.values(this.messages[i])[i]) : '';
                         // (data[i] === `${mm[2]}.id`) ? ele.children[i].innerHTML += m.id : '';
                         // (data[i] === `${mm[2]}.name`) ? ele.children[i].innerHTML += m.name : '';
                         // (data[i] === `${mm[2]}.number`) ? ele.children[i].innerHTML += m.number : '';
-                        ele.children[i].innerHTML += '<br />';
+                        // ele.children[i].innerHTML += '<br />';
                     // }
                     // });
-                }
+                // }
                 // console.log(ele.children[1]);
                 // this.messages.map(m => {
 
